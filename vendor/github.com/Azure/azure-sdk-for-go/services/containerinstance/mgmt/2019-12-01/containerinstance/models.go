@@ -31,179 +31,6 @@ import (
 // The package's fully qualified name.
 const fqdn = "github.com/Azure/azure-sdk-for-go/services/containerinstance/mgmt/2019-12-01/containerinstance"
 
-// ContainerGroupIPAddressType enumerates the values for container group ip address type.
-type ContainerGroupIPAddressType string
-
-const (
-	// Private ...
-	Private ContainerGroupIPAddressType = "Private"
-	// Public ...
-	Public ContainerGroupIPAddressType = "Public"
-)
-
-// PossibleContainerGroupIPAddressTypeValues returns an array of possible values for the ContainerGroupIPAddressType const type.
-func PossibleContainerGroupIPAddressTypeValues() []ContainerGroupIPAddressType {
-	return []ContainerGroupIPAddressType{Private, Public}
-}
-
-// ContainerGroupNetworkProtocol enumerates the values for container group network protocol.
-type ContainerGroupNetworkProtocol string
-
-const (
-	// TCP ...
-	TCP ContainerGroupNetworkProtocol = "TCP"
-	// UDP ...
-	UDP ContainerGroupNetworkProtocol = "UDP"
-)
-
-// PossibleContainerGroupNetworkProtocolValues returns an array of possible values for the ContainerGroupNetworkProtocol const type.
-func PossibleContainerGroupNetworkProtocolValues() []ContainerGroupNetworkProtocol {
-	return []ContainerGroupNetworkProtocol{TCP, UDP}
-}
-
-// ContainerGroupRestartPolicy enumerates the values for container group restart policy.
-type ContainerGroupRestartPolicy string
-
-const (
-	// Always ...
-	Always ContainerGroupRestartPolicy = "Always"
-	// Never ...
-	Never ContainerGroupRestartPolicy = "Never"
-	// OnFailure ...
-	OnFailure ContainerGroupRestartPolicy = "OnFailure"
-)
-
-// PossibleContainerGroupRestartPolicyValues returns an array of possible values for the ContainerGroupRestartPolicy const type.
-func PossibleContainerGroupRestartPolicyValues() []ContainerGroupRestartPolicy {
-	return []ContainerGroupRestartPolicy{Always, Never, OnFailure}
-}
-
-// ContainerGroupSku enumerates the values for container group sku.
-type ContainerGroupSku string
-
-const (
-	// Dedicated ...
-	Dedicated ContainerGroupSku = "Dedicated"
-	// Standard ...
-	Standard ContainerGroupSku = "Standard"
-)
-
-// PossibleContainerGroupSkuValues returns an array of possible values for the ContainerGroupSku const type.
-func PossibleContainerGroupSkuValues() []ContainerGroupSku {
-	return []ContainerGroupSku{Dedicated, Standard}
-}
-
-// ContainerNetworkProtocol enumerates the values for container network protocol.
-type ContainerNetworkProtocol string
-
-const (
-	// ContainerNetworkProtocolTCP ...
-	ContainerNetworkProtocolTCP ContainerNetworkProtocol = "TCP"
-	// ContainerNetworkProtocolUDP ...
-	ContainerNetworkProtocolUDP ContainerNetworkProtocol = "UDP"
-)
-
-// PossibleContainerNetworkProtocolValues returns an array of possible values for the ContainerNetworkProtocol const type.
-func PossibleContainerNetworkProtocolValues() []ContainerNetworkProtocol {
-	return []ContainerNetworkProtocol{ContainerNetworkProtocolTCP, ContainerNetworkProtocolUDP}
-}
-
-// GpuSku enumerates the values for gpu sku.
-type GpuSku string
-
-const (
-	// K80 ...
-	K80 GpuSku = "K80"
-	// P100 ...
-	P100 GpuSku = "P100"
-	// V100 ...
-	V100 GpuSku = "V100"
-)
-
-// PossibleGpuSkuValues returns an array of possible values for the GpuSku const type.
-func PossibleGpuSkuValues() []GpuSku {
-	return []GpuSku{K80, P100, V100}
-}
-
-// LogAnalyticsLogType enumerates the values for log analytics log type.
-type LogAnalyticsLogType string
-
-const (
-	// ContainerInsights ...
-	ContainerInsights LogAnalyticsLogType = "ContainerInsights"
-	// ContainerInstanceLogs ...
-	ContainerInstanceLogs LogAnalyticsLogType = "ContainerInstanceLogs"
-)
-
-// PossibleLogAnalyticsLogTypeValues returns an array of possible values for the LogAnalyticsLogType const type.
-func PossibleLogAnalyticsLogTypeValues() []LogAnalyticsLogType {
-	return []LogAnalyticsLogType{ContainerInsights, ContainerInstanceLogs}
-}
-
-// OperatingSystemTypes enumerates the values for operating system types.
-type OperatingSystemTypes string
-
-const (
-	// Linux ...
-	Linux OperatingSystemTypes = "Linux"
-	// Windows ...
-	Windows OperatingSystemTypes = "Windows"
-)
-
-// PossibleOperatingSystemTypesValues returns an array of possible values for the OperatingSystemTypes const type.
-func PossibleOperatingSystemTypesValues() []OperatingSystemTypes {
-	return []OperatingSystemTypes{Linux, Windows}
-}
-
-// OperationsOrigin enumerates the values for operations origin.
-type OperationsOrigin string
-
-const (
-	// System ...
-	System OperationsOrigin = "System"
-	// User ...
-	User OperationsOrigin = "User"
-)
-
-// PossibleOperationsOriginValues returns an array of possible values for the OperationsOrigin const type.
-func PossibleOperationsOriginValues() []OperationsOrigin {
-	return []OperationsOrigin{System, User}
-}
-
-// ResourceIdentityType enumerates the values for resource identity type.
-type ResourceIdentityType string
-
-const (
-	// None ...
-	None ResourceIdentityType = "None"
-	// SystemAssigned ...
-	SystemAssigned ResourceIdentityType = "SystemAssigned"
-	// SystemAssignedUserAssigned ...
-	SystemAssignedUserAssigned ResourceIdentityType = "SystemAssigned, UserAssigned"
-	// UserAssigned ...
-	UserAssigned ResourceIdentityType = "UserAssigned"
-)
-
-// PossibleResourceIdentityTypeValues returns an array of possible values for the ResourceIdentityType const type.
-func PossibleResourceIdentityTypeValues() []ResourceIdentityType {
-	return []ResourceIdentityType{None, SystemAssigned, SystemAssignedUserAssigned, UserAssigned}
-}
-
-// Scheme enumerates the values for scheme.
-type Scheme string
-
-const (
-	// HTTP ...
-	HTTP Scheme = "http"
-	// HTTPS ...
-	HTTPS Scheme = "https"
-)
-
-// PossibleSchemeValues returns an array of possible values for the Scheme const type.
-func PossibleSchemeValues() []Scheme {
-	return []Scheme{HTTP, HTTPS}
-}
-
 // AzureFileVolume the properties of the Azure File volume. Azure File shares are mounted as volumes.
 type AzureFileVolume struct {
 	// ShareName - The name of the Azure File share to be mounted as a volume.
@@ -301,10 +128,15 @@ func (cilr CachedImagesListResult) IsEmpty() bool {
 	return cilr.Value == nil || len(*cilr.Value) == 0
 }
 
+// hasNextLink returns true if the NextLink is not empty.
+func (cilr CachedImagesListResult) hasNextLink() bool {
+	return cilr.NextLink != nil && len(*cilr.NextLink) != 0
+}
+
 // cachedImagesListResultPreparer prepares a request to retrieve the next set of results.
 // It returns nil if no more results exist.
 func (cilr CachedImagesListResult) cachedImagesListResultPreparer(ctx context.Context) (*http.Request, error) {
-	if cilr.NextLink == nil || len(to.String(cilr.NextLink)) < 1 {
+	if !cilr.hasNextLink() {
 		return nil, nil
 	}
 	return autorest.Prepare((&http.Request{}).WithContext(ctx),
@@ -332,11 +164,16 @@ func (page *CachedImagesListResultPage) NextWithContext(ctx context.Context) (er
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	next, err := page.fn(ctx, page.cilr)
-	if err != nil {
-		return err
+	for {
+		next, err := page.fn(ctx, page.cilr)
+		if err != nil {
+			return err
+		}
+		page.cilr = next
+		if !next.hasNextLink() || !next.IsEmpty() {
+			break
+		}
 	}
-	page.cilr = next
 	return nil
 }
 
@@ -366,8 +203,11 @@ func (page CachedImagesListResultPage) Values() []CachedImages {
 }
 
 // Creates a new instance of the CachedImagesListResultPage type.
-func NewCachedImagesListResultPage(getNextPage func(context.Context, CachedImagesListResult) (CachedImagesListResult, error)) CachedImagesListResultPage {
-	return CachedImagesListResultPage{fn: getNextPage}
+func NewCachedImagesListResultPage(cur CachedImagesListResult, getNextPage func(context.Context, CachedImagesListResult) (CachedImagesListResult, error)) CachedImagesListResultPage {
+	return CachedImagesListResultPage{
+		fn:   getNextPage,
+		cilr: cur,
+	}
 }
 
 // Capabilities the regional capabilities.
@@ -473,10 +313,15 @@ func (clr CapabilitiesListResult) IsEmpty() bool {
 	return clr.Value == nil || len(*clr.Value) == 0
 }
 
+// hasNextLink returns true if the NextLink is not empty.
+func (clr CapabilitiesListResult) hasNextLink() bool {
+	return clr.NextLink != nil && len(*clr.NextLink) != 0
+}
+
 // capabilitiesListResultPreparer prepares a request to retrieve the next set of results.
 // It returns nil if no more results exist.
 func (clr CapabilitiesListResult) capabilitiesListResultPreparer(ctx context.Context) (*http.Request, error) {
-	if clr.NextLink == nil || len(to.String(clr.NextLink)) < 1 {
+	if !clr.hasNextLink() {
 		return nil, nil
 	}
 	return autorest.Prepare((&http.Request{}).WithContext(ctx),
@@ -504,11 +349,16 @@ func (page *CapabilitiesListResultPage) NextWithContext(ctx context.Context) (er
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	next, err := page.fn(ctx, page.clr)
-	if err != nil {
-		return err
+	for {
+		next, err := page.fn(ctx, page.clr)
+		if err != nil {
+			return err
+		}
+		page.clr = next
+		if !next.hasNextLink() || !next.IsEmpty() {
+			break
+		}
 	}
-	page.clr = next
 	return nil
 }
 
@@ -538,8 +388,11 @@ func (page CapabilitiesListResultPage) Values() []Capabilities {
 }
 
 // Creates a new instance of the CapabilitiesListResultPage type.
-func NewCapabilitiesListResultPage(getNextPage func(context.Context, CapabilitiesListResult) (CapabilitiesListResult, error)) CapabilitiesListResultPage {
-	return CapabilitiesListResultPage{fn: getNextPage}
+func NewCapabilitiesListResultPage(cur CapabilitiesListResult, getNextPage func(context.Context, CapabilitiesListResult) (CapabilitiesListResult, error)) CapabilitiesListResultPage {
+	return CapabilitiesListResultPage{
+		fn:  getNextPage,
+		clr: cur,
+	}
 }
 
 // CloudError an error response from the Container Instance service.
@@ -873,10 +726,15 @@ func (cglr ContainerGroupListResult) IsEmpty() bool {
 	return cglr.Value == nil || len(*cglr.Value) == 0
 }
 
+// hasNextLink returns true if the NextLink is not empty.
+func (cglr ContainerGroupListResult) hasNextLink() bool {
+	return cglr.NextLink != nil && len(*cglr.NextLink) != 0
+}
+
 // containerGroupListResultPreparer prepares a request to retrieve the next set of results.
 // It returns nil if no more results exist.
 func (cglr ContainerGroupListResult) containerGroupListResultPreparer(ctx context.Context) (*http.Request, error) {
-	if cglr.NextLink == nil || len(to.String(cglr.NextLink)) < 1 {
+	if !cglr.hasNextLink() {
 		return nil, nil
 	}
 	return autorest.Prepare((&http.Request{}).WithContext(ctx),
@@ -904,11 +762,16 @@ func (page *ContainerGroupListResultPage) NextWithContext(ctx context.Context) (
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	next, err := page.fn(ctx, page.cglr)
-	if err != nil {
-		return err
+	for {
+		next, err := page.fn(ctx, page.cglr)
+		if err != nil {
+			return err
+		}
+		page.cglr = next
+		if !next.hasNextLink() || !next.IsEmpty() {
+			break
+		}
 	}
-	page.cglr = next
 	return nil
 }
 
@@ -938,8 +801,11 @@ func (page ContainerGroupListResultPage) Values() []ContainerGroup {
 }
 
 // Creates a new instance of the ContainerGroupListResultPage type.
-func NewContainerGroupListResultPage(getNextPage func(context.Context, ContainerGroupListResult) (ContainerGroupListResult, error)) ContainerGroupListResultPage {
-	return ContainerGroupListResultPage{fn: getNextPage}
+func NewContainerGroupListResultPage(cur ContainerGroupListResult, getNextPage func(context.Context, ContainerGroupListResult) (ContainerGroupListResult, error)) ContainerGroupListResultPage {
+	return ContainerGroupListResultPage{
+		fn:   getNextPage,
+		cglr: cur,
+	}
 }
 
 // ContainerGroupNetworkProfile container group network profile information.
@@ -984,6 +850,48 @@ type ContainerGroupProperties struct {
 	InitContainers *[]InitContainerDefinition `json:"initContainers,omitempty"`
 }
 
+// MarshalJSON is the custom marshaler for ContainerGroupProperties.
+func (cg ContainerGroupProperties) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if cg.Containers != nil {
+		objectMap["containers"] = cg.Containers
+	}
+	if cg.ImageRegistryCredentials != nil {
+		objectMap["imageRegistryCredentials"] = cg.ImageRegistryCredentials
+	}
+	if cg.RestartPolicy != "" {
+		objectMap["restartPolicy"] = cg.RestartPolicy
+	}
+	if cg.IPAddress != nil {
+		objectMap["ipAddress"] = cg.IPAddress
+	}
+	if cg.OsType != "" {
+		objectMap["osType"] = cg.OsType
+	}
+	if cg.Volumes != nil {
+		objectMap["volumes"] = cg.Volumes
+	}
+	if cg.Diagnostics != nil {
+		objectMap["diagnostics"] = cg.Diagnostics
+	}
+	if cg.NetworkProfile != nil {
+		objectMap["networkProfile"] = cg.NetworkProfile
+	}
+	if cg.DNSConfig != nil {
+		objectMap["dnsConfig"] = cg.DNSConfig
+	}
+	if cg.Sku != "" {
+		objectMap["sku"] = cg.Sku
+	}
+	if cg.EncryptionProperties != nil {
+		objectMap["encryptionProperties"] = cg.EncryptionProperties
+	}
+	if cg.InitContainers != nil {
+		objectMap["initContainers"] = cg.InitContainers
+	}
+	return json.Marshal(objectMap)
+}
+
 // ContainerGroupPropertiesInstanceView the instance view of the container group. Only valid in response.
 type ContainerGroupPropertiesInstanceView struct {
 	// Events - READ-ONLY; The events of this container group.
@@ -995,105 +903,37 @@ type ContainerGroupPropertiesInstanceView struct {
 // ContainerGroupsCreateOrUpdateFuture an abstraction for monitoring and retrieving the results of a
 // long-running operation.
 type ContainerGroupsCreateOrUpdateFuture struct {
-	azure.Future
-}
-
-// Result returns the result of the asynchronous operation.
-// If the operation has not completed it will return an error.
-func (future *ContainerGroupsCreateOrUpdateFuture) Result(client ContainerGroupsClient) (cg ContainerGroup, err error) {
-	var done bool
-	done, err = future.DoneWithContext(context.Background(), client)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "containerinstance.ContainerGroupsCreateOrUpdateFuture", "Result", future.Response(), "Polling failure")
-		return
-	}
-	if !done {
-		err = azure.NewAsyncOpIncompleteError("containerinstance.ContainerGroupsCreateOrUpdateFuture")
-		return
-	}
-	sender := autorest.DecorateSender(client, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
-	if cg.Response.Response, err = future.GetResult(sender); err == nil && cg.Response.Response.StatusCode != http.StatusNoContent {
-		cg, err = client.CreateOrUpdateResponder(cg.Response.Response)
-		if err != nil {
-			err = autorest.NewErrorWithError(err, "containerinstance.ContainerGroupsCreateOrUpdateFuture", "Result", cg.Response.Response, "Failure responding to request")
-		}
-	}
-	return
+	azure.FutureAPI
+	// Result returns the result of the asynchronous operation.
+	// If the operation has not completed it will return an error.
+	Result func(ContainerGroupsClient) (ContainerGroup, error)
 }
 
 // ContainerGroupsDeleteFuture an abstraction for monitoring and retrieving the results of a long-running
 // operation.
 type ContainerGroupsDeleteFuture struct {
-	azure.Future
-}
-
-// Result returns the result of the asynchronous operation.
-// If the operation has not completed it will return an error.
-func (future *ContainerGroupsDeleteFuture) Result(client ContainerGroupsClient) (cg ContainerGroup, err error) {
-	var done bool
-	done, err = future.DoneWithContext(context.Background(), client)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "containerinstance.ContainerGroupsDeleteFuture", "Result", future.Response(), "Polling failure")
-		return
-	}
-	if !done {
-		err = azure.NewAsyncOpIncompleteError("containerinstance.ContainerGroupsDeleteFuture")
-		return
-	}
-	sender := autorest.DecorateSender(client, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
-	if cg.Response.Response, err = future.GetResult(sender); err == nil && cg.Response.Response.StatusCode != http.StatusNoContent {
-		cg, err = client.DeleteResponder(cg.Response.Response)
-		if err != nil {
-			err = autorest.NewErrorWithError(err, "containerinstance.ContainerGroupsDeleteFuture", "Result", cg.Response.Response, "Failure responding to request")
-		}
-	}
-	return
+	azure.FutureAPI
+	// Result returns the result of the asynchronous operation.
+	// If the operation has not completed it will return an error.
+	Result func(ContainerGroupsClient) (ContainerGroup, error)
 }
 
 // ContainerGroupsRestartFuture an abstraction for monitoring and retrieving the results of a long-running
 // operation.
 type ContainerGroupsRestartFuture struct {
-	azure.Future
-}
-
-// Result returns the result of the asynchronous operation.
-// If the operation has not completed it will return an error.
-func (future *ContainerGroupsRestartFuture) Result(client ContainerGroupsClient) (ar autorest.Response, err error) {
-	var done bool
-	done, err = future.DoneWithContext(context.Background(), client)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "containerinstance.ContainerGroupsRestartFuture", "Result", future.Response(), "Polling failure")
-		return
-	}
-	if !done {
-		err = azure.NewAsyncOpIncompleteError("containerinstance.ContainerGroupsRestartFuture")
-		return
-	}
-	ar.Response = future.Response()
-	return
+	azure.FutureAPI
+	// Result returns the result of the asynchronous operation.
+	// If the operation has not completed it will return an error.
+	Result func(ContainerGroupsClient) (autorest.Response, error)
 }
 
 // ContainerGroupsStartFuture an abstraction for monitoring and retrieving the results of a long-running
 // operation.
 type ContainerGroupsStartFuture struct {
-	azure.Future
-}
-
-// Result returns the result of the asynchronous operation.
-// If the operation has not completed it will return an error.
-func (future *ContainerGroupsStartFuture) Result(client ContainerGroupsClient) (ar autorest.Response, err error) {
-	var done bool
-	done, err = future.DoneWithContext(context.Background(), client)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "containerinstance.ContainerGroupsStartFuture", "Result", future.Response(), "Polling failure")
-		return
-	}
-	if !done {
-		err = azure.NewAsyncOpIncompleteError("containerinstance.ContainerGroupsStartFuture")
-		return
-	}
-	ar.Response = future.Response()
-	return
+	azure.FutureAPI
+	// Result returns the result of the asynchronous operation.
+	// If the operation has not completed it will return an error.
+	Result func(ContainerGroupsClient) (autorest.Response, error)
 }
 
 // ContainerHTTPGet the container Http Get settings, for liveness or readiness probe
@@ -1152,6 +992,36 @@ type ContainerProperties struct {
 	LivenessProbe *ContainerProbe `json:"livenessProbe,omitempty"`
 	// ReadinessProbe - The readiness probe.
 	ReadinessProbe *ContainerProbe `json:"readinessProbe,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for ContainerProperties.
+func (cp ContainerProperties) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if cp.Image != nil {
+		objectMap["image"] = cp.Image
+	}
+	if cp.Command != nil {
+		objectMap["command"] = cp.Command
+	}
+	if cp.Ports != nil {
+		objectMap["ports"] = cp.Ports
+	}
+	if cp.EnvironmentVariables != nil {
+		objectMap["environmentVariables"] = cp.EnvironmentVariables
+	}
+	if cp.Resources != nil {
+		objectMap["resources"] = cp.Resources
+	}
+	if cp.VolumeMounts != nil {
+		objectMap["volumeMounts"] = cp.VolumeMounts
+	}
+	if cp.LivenessProbe != nil {
+		objectMap["livenessProbe"] = cp.LivenessProbe
+	}
+	if cp.ReadinessProbe != nil {
+		objectMap["readinessProbe"] = cp.ReadinessProbe
+	}
+	return json.Marshal(objectMap)
 }
 
 // ContainerPropertiesInstanceView the instance view of the container instance. Only valid in response.
@@ -1321,6 +1191,24 @@ type InitContainerPropertiesDefinition struct {
 	VolumeMounts *[]VolumeMount `json:"volumeMounts,omitempty"`
 }
 
+// MarshalJSON is the custom marshaler for InitContainerPropertiesDefinition.
+func (icpd InitContainerPropertiesDefinition) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if icpd.Image != nil {
+		objectMap["image"] = icpd.Image
+	}
+	if icpd.Command != nil {
+		objectMap["command"] = icpd.Command
+	}
+	if icpd.EnvironmentVariables != nil {
+		objectMap["environmentVariables"] = icpd.EnvironmentVariables
+	}
+	if icpd.VolumeMounts != nil {
+		objectMap["volumeMounts"] = icpd.VolumeMounts
+	}
+	return json.Marshal(objectMap)
+}
+
 // InitContainerPropertiesDefinitionInstanceView the instance view of the init container. Only valid in
 // response.
 type InitContainerPropertiesDefinitionInstanceView struct {
@@ -1346,6 +1234,24 @@ type IPAddress struct {
 	DNSNameLabel *string `json:"dnsNameLabel,omitempty"`
 	// Fqdn - READ-ONLY; The FQDN for the IP.
 	Fqdn *string `json:"fqdn,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for IPAddress.
+func (ia IPAddress) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if ia.Ports != nil {
+		objectMap["ports"] = ia.Ports
+	}
+	if ia.Type != "" {
+		objectMap["type"] = ia.Type
+	}
+	if ia.IP != nil {
+		objectMap["ip"] = ia.IP
+	}
+	if ia.DNSNameLabel != nil {
+		objectMap["dnsNameLabel"] = ia.DNSNameLabel
+	}
+	return json.Marshal(objectMap)
 }
 
 // LogAnalytics container group log analytics information.
@@ -1487,10 +1393,15 @@ func (olr OperationListResult) IsEmpty() bool {
 	return olr.Value == nil || len(*olr.Value) == 0
 }
 
+// hasNextLink returns true if the NextLink is not empty.
+func (olr OperationListResult) hasNextLink() bool {
+	return olr.NextLink != nil && len(*olr.NextLink) != 0
+}
+
 // operationListResultPreparer prepares a request to retrieve the next set of results.
 // It returns nil if no more results exist.
 func (olr OperationListResult) operationListResultPreparer(ctx context.Context) (*http.Request, error) {
-	if olr.NextLink == nil || len(to.String(olr.NextLink)) < 1 {
+	if !olr.hasNextLink() {
 		return nil, nil
 	}
 	return autorest.Prepare((&http.Request{}).WithContext(ctx),
@@ -1518,11 +1429,16 @@ func (page *OperationListResultPage) NextWithContext(ctx context.Context) (err e
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	next, err := page.fn(ctx, page.olr)
-	if err != nil {
-		return err
+	for {
+		next, err := page.fn(ctx, page.olr)
+		if err != nil {
+			return err
+		}
+		page.olr = next
+		if !next.hasNextLink() || !next.IsEmpty() {
+			break
+		}
 	}
-	page.olr = next
 	return nil
 }
 
@@ -1552,8 +1468,11 @@ func (page OperationListResultPage) Values() []Operation {
 }
 
 // Creates a new instance of the OperationListResultPage type.
-func NewOperationListResultPage(getNextPage func(context.Context, OperationListResult) (OperationListResult, error)) OperationListResultPage {
-	return OperationListResultPage{fn: getNextPage}
+func NewOperationListResultPage(cur OperationListResult, getNextPage func(context.Context, OperationListResult) (OperationListResult, error)) OperationListResultPage {
+	return OperationListResultPage{
+		fn:  getNextPage,
+		olr: cur,
+	}
 }
 
 // Port the port exposed on the container group.
